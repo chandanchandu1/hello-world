@@ -16,11 +16,25 @@ pipeline
             }
         }
 
-        stage('Build')
+        stage('Test and Build')
         {
             steps
             {
                 sh 'mvn clean install'
+            }
+        }
+
+        stage('SonarQube: Quality code Analysis')
+        {
+            steps
+            {
+                script
+                {
+                    withSonarQubeEnv(credentialsId: 'Sonar-API-Key') 
+                    {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
             }
         }
     }
