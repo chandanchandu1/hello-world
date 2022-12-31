@@ -6,7 +6,7 @@ pipeline
     {
         stage('git clone')
         {
-            stages
+            steps
             {
                 git 'https://github.com/chandanchandu1/hello-world.git'
             }
